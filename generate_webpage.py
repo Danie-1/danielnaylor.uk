@@ -85,7 +85,9 @@ class Course:
 
     def get_acronyms(self) -> list[str]:
         aliases = (self.path / "aliases.txt").read_text().splitlines()
-        return list(set(aliases + [self.course_code.lower()]))
+        return list(
+            set(alias.lower() for alias in aliases + [self.course_code.lower()])
+        )
 
 
 @dataclass
@@ -155,6 +157,13 @@ def get_courses() -> list[Course]:
 
 def get_course_from_alias(acronym: str) -> Course | None:
     for course in get_courses():
-        if acronym in course.get_acronyms():
+        if acronym.lower() in course.get_acronyms():
+            return course
+    return None
+
+
+def get_course_from_course_code(course_code: str) -> Course | None:
+    for course in get_courses():
+        if course_code.lower() == course.course_code.lower():
             return course
     return None

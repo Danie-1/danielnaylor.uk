@@ -1,11 +1,12 @@
 from pathlib import Path
 
-from flask import Flask, redirect, send_file
+from flask import Flask, abort, redirect, send_file
 
 from generate_webpage import (
     BASE_FOLDER,
     generate_homepage,
     get_course_from_alias,
+    get_course_from_course_code,
     part_to_year_number,
     term_name_to_number,
 )
@@ -33,15 +34,22 @@ def notes_html(year: str, term: str, course: str, html_file: str):
 @app.route("/<alias>")
 def course_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
-        return redirect("/")
+        return abort(404)
     return redirect(course.pdf_url())
 
 
 @app.route("/<alias>.html")
 def course_html_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
-        return redirect("/")
+        return abort(404)
     return redirect(course.html_url())
+
+
+@app.route("/notes/<course_code>.apkg")
+def flashcards(course_code: str):
+    if not (course := get_course_from_course_code(course_code)):
+        return abort(404)
+    return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
 
 
 @app.route("/")
