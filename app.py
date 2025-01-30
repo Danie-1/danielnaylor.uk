@@ -1,7 +1,5 @@
-import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 from flask import Flask, redirect, send_file
 
 from generate_webpage import (
@@ -12,10 +10,6 @@ from generate_webpage import (
     term_name_to_number,
 )
 
-
-load_dotenv()
-
-BASE_URL = os.environ["BASE_URL"]
 
 app = Flask(__name__)
 
@@ -39,15 +33,15 @@ def notes_html(year: str, term: str, course: str, html_file: str):
 @app.route("/<alias>")
 def course_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
-        return redirect(BASE_URL)
-    return redirect(BASE_URL + course.pdf_url())
+        return redirect("/")
+    return redirect(course.pdf_url())
 
 
 @app.route("/<alias>.html")
 def course_html_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
-        return redirect(BASE_URL)
-    return redirect(BASE_URL + course.html_url())
+        return redirect("/")
+    return redirect(course.html_url())
 
 
 @app.route("/")
