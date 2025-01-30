@@ -4,7 +4,7 @@ from flask import Flask, abort, redirect, send_file
 
 from generate_webpage import (
     BASE_FOLDER,
-    generate_homepage,
+    generate_notes_homepage,
     get_course_from_alias,
     get_course_from_course_code,
     part_to_year_number,
@@ -52,9 +52,14 @@ def flashcards(course_code: str):
     return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
 
 
+@app.route("/notes/")
+def notes_home():
+    return generate_notes_homepage()
+
+
 @app.route("/")
 def home():
-    return generate_homepage()
+    return send_file("./templates/home.html")
 
 
 if __name__ == "__main__":
