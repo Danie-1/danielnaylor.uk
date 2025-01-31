@@ -30,15 +30,15 @@
 
 {% block content %}
   <div class="container-lg">
-    <h1 class="text-center h1">Maths Notes</h1>
+    <h1 class="text-center">Maths Notes</h1>
     {% for term in terms %}
-      <h2 class="text-center h2 pt-3">{{ term.part.part_name }} {{ term.term_name }}</h2>
+      <h2 class="text-center pt-3">{{ term.part.part_name }} {{ term.term_name }}</h2>
       <div class="row px-1 px-md-3">
         {% for course in term.get_courses() %}
-        <div class="col-6 col-xxl-3 px-2 px-md-3 py-1 py-sm-2">
+        <div class="col-6 col-xxl-3 px-2 px-md-3 py-2">
           <div class="mx-0 px-1 pb-2 pt-2 rounded-3 rounded-sm-4 grid row custom-shadow h-100 d-flex flex-column">
-            <div class="text-center col-12 flex-fill d-flex align-items-center pb-2">
-              <h4 class="m-auto">{{ course.course_name }}</h4>
+            <div class="text-center col-12 flex-fill d-flex align-items-center pb-1">
+              <h6 class="m-auto">{{ course.course_name }}</h6>
             </div>
 
             <div class="row m-0 p-1">
