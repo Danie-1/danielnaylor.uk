@@ -13,6 +13,7 @@
     {% endblock %}
   </head>
   <body>
+    {% include "navbar.html" %}
     {% block content %}{% endblock %}
     {% block scripts %}
       {{ bootstrap.load_js() }}

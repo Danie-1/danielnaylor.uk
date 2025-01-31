@@ -64,7 +64,7 @@ def flashcards(course_code: str):
 @app.route("/notes/")
 def notes_home():
     term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes.html", terms=term_list)
+    return render_template("notes_home.html", terms=term_list)
 
 
 @app.route("/")
