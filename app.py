@@ -28,16 +28,11 @@ def notes_pdf(year: str, term: str, course: str, pdf_file: str):
     return send_file(html_url_to_file_url(year, term, course) / f"{pdf_file}.pdf")
 
 
-@app.route("/notes/<year>/<term>/<course>/<html_file>")
+@app.route("/notes/<year>/<term>/<course>/<path:html_file>")
 def notes_html(year: str, term: str, course: str, html_file: str):
     if html_file == f"{course}.html":
         html_file = f"{course}_final.html"
     return send_file(html_url_to_file_url(year, term, course) / f"HTML/{html_file}")
-
-
-@app.route("/notes/<year>/<term>/<course>/images/<image_name>")
-def notes_html_images(year: str, term: str, course: str, image_name: str):
-    return send_file(html_url_to_file_url(year, term, course) / f"HTML/images/{image_name}")
 
 
 @app.route("/<alias>")
