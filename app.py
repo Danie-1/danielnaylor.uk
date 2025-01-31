@@ -57,20 +57,20 @@ def flashcards(course_code: str):
     return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
 
 
-@app.route("/notes/")
+@app.route("/notes_old/")
 def notes_home():
     return generate_notes_homepage()
+
+
+@app.route("/notes/")
+def notes_test():
+    term_list = [term for year in get_years() for term in year.get_terms()]
+    return render_template("notes_test.html", terms=term_list)
 
 
 @app.route("/")
 def home():
     return send_file("./templates/home.html")
-
-
-@app.route("/notes_test/")
-def notes_test():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_test.html", terms=term_list)
 
 
 if __name__ == "__main__":
