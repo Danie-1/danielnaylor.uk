@@ -1,6 +1,22 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<style>
+  #interestedIn > li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+</style>
+{% endblock %}
 {% block title %}Daniel Naylor's website{% endblock %}
+{% block content %}
+<br>
+<p>My name is Daniel Naylor.</p>
 
-<li><a href="/notes/">Click here to view my notes and flashcards on Cambridge maths courses.</a></li>
-<li><a href="https://ggim.me/">Click here to go to the Olympiad Bot website.</a></li>
-<li><a href="https://www.linkedin.com/in/daniel-naylor-757466267/">View my Linkedin profile</a></li>
-<li><a href="https://www.github.com/Danie-1/">View my github profile.</a></li>
+<p>This is the homepage of my website!</p>
+
+You might be interested in:
+<ul id="interestedIn">
+  <li><a href="{{ url_for("notes_home") }}">My notes and flashcards on Cambridge maths courses.</a></li>
+</ul>
+{% endblock %}

@@ -75,7 +75,7 @@ def notes_home_alt():
 
 @app.route("/")
 def home():
-    return render_template("home_old.html")
+    return render_template("home.html")
 
 
 if __name__ == "__main__":
