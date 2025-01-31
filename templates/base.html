@@ -7,6 +7,27 @@
 
       {% block styles %}
         {{ bootstrap.load_css() }}
+        <style>
+          :root {
+            color-scheme: light dark;
+            --light-gray: #aaaaaa;
+            --extra-light-gray: #eeeeee;
+            --extra-dark-gray: #1d2225;
+          }
+          nav {
+            background-color: var(--light);
+          }
+          [data-bs-theme="dark"] {
+            nav {
+              background-color: var(--extra-dark-gray);
+            }
+          }
+          @media (prefers-color-scheme: dark) {
+            nav {
+              background-color: var(--extra-dark-gray);
+            }
+          }
+        </style>
       {% endblock %}
 
       <title>{% block title %}{% endblock %}</title>

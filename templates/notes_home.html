@@ -3,16 +3,27 @@
 {{ super() }}
 <style>
   :root {
-    --light-gray: #AAAAAA;
-    --extra-light-gray: #EEEEEE;
+    --flashcards-disabled-outline: var(--light-gray);
+    --flashcards-disabled-bg: white;
+    --active-gray: var(--extra-light-gray);
+  }
+  [data-bs-theme="dark"] {
+    --flashcards-disabled-outline: var(--bs-gray);
+    --flashcards-disabled-bg: var(--bs-tertiary-bg)
+    --active-gray: var(--bs-gray);
+  }
+  @media (prefers-color-scheme: dark) {
+    --flashcards-disabled-outline: var(--bs-gray);
+    --flashcards-disabled-bg: var(--bs-tertiary-bg)
+    --active-gray: var(--bs-gray);
   }
   .notes-button-padding {
     padding-left: calc(2rem) !important;
   }
   .btn-primary.disabled {
-    color: var(--light-gray);
-    background-color: white;
-    border: var(--bs-btn-border-width) solid var(--light-gray);
+    color: var(--flashcards-disabled-outline);
+    background-color: var(--flashcards-disabled-bg);
+    border: var(--bs-btn-border-width) solid var(--flashcards-disabled-outline);
   }
   .custom-shadow {
      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -26,8 +37,8 @@
     }
   }
   .active-grey:active {
-    background-color: var(--extra-light-gray);
-    color: black;
+    background-color: var(--active-gray);
+    color: var(--bs-primary-color);
   }
 </style>
 {% endblock %}
