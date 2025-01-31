@@ -15,14 +15,9 @@
             --extra-dark-gray: #1d2225;
           }
           nav {
-            background-color: var(--light);
+            background-color: var(--bs-light);
           }
           [data-bs-theme="dark"] {
-            nav {
-              background-color: var(--extra-dark-gray);
-            }
-          }
-          @media (prefers-color-scheme: dark) {
             nav {
               background-color: var(--extra-dark-gray);
             }
@@ -40,6 +35,17 @@
     </div>
     {% block scripts %}
       {{ bootstrap.load_js() }}
+      <script>
+        function setTheme() {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
+          } else {
+            document.documentElement.setAttribute("data-bs-theme", "light");
+          }
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme)
+        setTheme()
+      </script>
     {% endblock %}
   </body>
 </html>
