@@ -13,6 +13,7 @@
             --light-gray: #aaaaaa;
             --extra-light-gray: #eeeeee;
             --extra-dark-gray: #1d2225;
+            --navbar-toggler-color: rgba(33, 37, 41, 0.75);
           }
           nav {
             background-color: var(--bs-light);
@@ -21,6 +22,46 @@
             nav {
               background-color: var(--extra-dark-gray);
             }
+            --navbar-toggler-color: rgba(255, 255, 255, 0.55);
+          }
+          .navbar-toggler {
+            width: 1.5rem;
+            height: 1.5rem;
+            position: relative;
+            margin-right: 0.95rem;
+          }
+          .navbar-toggler span {
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            background: var(--navbar-toggler-color);
+            border-radius: 0.75rem;
+            transition: 0.2s ease-in-out;
+            left: 0%;
+          }
+          .navbar-toggler.collapsed span:nth-child(1) {
+            top: 12%;
+            transform: rotate(0deg);
+          }
+          .navbar-toggler.collapsed span:nth-child(2) {
+            top: 46%;
+            opacity: 1;
+            transform: rotate(0deg);
+          }
+          .navbar-toggler.collapsed span:nth-child(3) {
+            top: 80%;
+            transform: rotate(0deg);
+          }
+          .navbar-toggler span:nth-child(1) {
+            top: 46%;
+            transform: rotate(45deg);
+          }
+          .navbar-toggler span:nth-child(2) {
+            opacity: 0;
+          }
+          .navbar-toggler span:nth-child(3) {
+            top: 46%;
+            transform: rotate(-45deg);
           }
         </style>
       {% endblock %}
