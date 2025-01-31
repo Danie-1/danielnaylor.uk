@@ -77,8 +77,18 @@ class Course:
             return f"{self.url()}/lecture1.pdf"
         return f"{self.url()}/{self.course_code}.pdf"
 
+    def flashcards_url(self) -> str:
+        return f"/notes/{self.course_code}.apkg"
+
     def html_url(self) -> str:
         return f"{self.url()}/{self.course_code}.html"
+
+    @property
+    def epub_exists(self) -> bool:
+        return False
+
+    def epub_url(self) -> str:
+        return f"{self.url()}/{self.course_code}.epub"
 
     def __le__(self, other: Course) -> bool:
         return self.path.name <= other.path.name

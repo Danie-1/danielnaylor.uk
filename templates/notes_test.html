@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<style>
+  @media (min-width: 300px) and (max-width: 399px) {
+    .notes-button-padding {
+      padding-left: 25%;
+    }
+  }
+  @media (min-width: 400px) {
+    .notes-button-padding {
+      padding-left: 2.75rem;
+    }
+  }
+  @media (min-width: 1400px) {
+    .notes-button-padding {
+      padding-left: 25%
+    }
+  }
+  .btn-primary.disabled {
+    color: #AAAAAA;
+    background-color: #FFFFFF;
+    border: var(--bs-btn-border-width) solid #AAAAAA;
+  }
+  .custom-shadow {
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+</style>
+{% endblock %}
+{% block title %}Daniel's Cambridge Maths Notes{% endblock %}
+
+{% block content %}
+  <div class="container-lg">
+    <h1 class="text-center h1">Maths Notes</h1>
+    {% for term in terms %}
+      <h2 class="text-center h2">{{ term.part.part_name }} {{ term.term_name }}</h2>
+      <div class="row px-1 px-sm-2 px-md-3">
+        {% for course in term.get_courses() %}
+        <div class="col-6 col-xxl-3 px-1 px-sm-2 px-md-3 py-1 py-sm-2">
+          <div class="mx-0 px-1 px-sm-2 pb-2 pb-sm-3 pt-2 rounded-3 rounded-sm-4 grid row custom-shadow h-100 d-flex flex-column">
+            <div class="text-center col-12 flex-fill d-flex align-items-center pb-2">
+              <h4 class="m-auto">{{ course.course_name }}</h4>
+            </div>
+
+            <div class="row m-0 p-0">
+              <div class="btn-group col-12 col-md-6 pb-2 pb-md-0 px-1 px-sm-2" style="position: relative">
+                {% if course.notes_exist %}
+                  <a type="button" class="btn btn-primary notes-button-padding" href="{{ course.pdf_url() }}">
+                    Notes
+                  </a>
+                {% else %}
+                  <span type="button" class="btn btn-primary notes-button-padding disabled">
+                    Notes
+                  </span>
+                {% endif %}
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" style="max-width: 2rem;">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    {% if course.notes_exist %}
+                      <a class="dropdown-item" href="{{ course.pdf_url()}}">PDF</a>
+                    {% else %}
+                      <span class="dropdown-item disabled">PDF</span>
+                    {% endif %}
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    {% if course.html_exists %}
+                      <a class="dropdown-item" href="{{ course.html_url()}}">HTML</a>
+                    {% else %}
+                      <span class="dropdown-item disabled">HTML</span>
+                    {% endif %}
+                  </li>
+                  <li>
+                    {% if course.epub_exists %}
+                      <a class="dropdown-item" href="{{ course.epub_url()}}">EPUB</a>
+                    {% else %}
+                      <span class="dropdown-item disabled">EPUB</span>
+                    {% endif %}
+                  </li>
+                </ul>
+              </div>
+
+              <div class="btn-group col-12 col-md-6 px-1 px-sm-2">
+                {% if course.flashcards_exist %}
+                  <a type="button" class="btn btn-primary" href="{{ course.flashcards_url() }}">Flashcards</a>
+                {% else %}
+                  <span type="button" class="btn btn-primary disabled">Flashcards</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,18 +1,23 @@
+import os
 from pathlib import Path
 
-from flask import Flask, abort, redirect, send_file
+from dotenv import load_dotenv
+from flask import Flask, abort, redirect, render_template, send_file
+from flask_bootstrap import Bootstrap5
 
 from generate_webpage import (
     BASE_FOLDER,
     generate_notes_homepage,
     get_course_from_alias,
     get_course_from_course_code,
+    get_years,
     part_to_year_number,
     term_name_to_number,
 )
 
 
 app = Flask(__name__)
+Bootstrap5(app)
 
 
 def html_url_to_file_url(year: str, term: str, course: str) -> Path:
@@ -47,7 +52,7 @@ def course_html_redirect(alias: str):
 
 @app.route("/notes/<course_code>.apkg")
 def flashcards(course_code: str):
-    if not (course := get_course_from_course_code(course_code)):
+    if not get_course_from_course_code(course_code):
         return abort(404)
     return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
 
@@ -62,5 +67,13 @@ def home():
     return send_file("./templates/home.html")
 
 
+@app.route("/notes_test/")
+def notes_test():
+    term_list = [term for year in get_years() for term in year.get_terms()]
+    return render_template("notes_test.html", terms=term_list)
+
+
 if __name__ == "__main__":
-    app.run(port=5004)
+    load_dotenv()
+    debug = os.environ.get("FLASK_DEBUG") is not None
+    app.run(port=5005, debug=debug)
