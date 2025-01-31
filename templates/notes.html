@@ -41,11 +41,11 @@
             <div class="row m-0 p-1">
               <div class="btn-group col-12 col-md-6 pb-2 pb-md-0 px-1 notes-button" style="position: relative">
                 {% if course.notes_exist %}
-                  <a type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} p-1" href="{{ course.pdf_url() }}">
+                  <a type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} p-1 py-md-1" href="{{ course.pdf_url() }}">
                     Notes
                   </a>
                 {% else %}
-                  <span type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} disabled p-1">
+                  <span type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} disabled p-1 py-md-0">
                     Notes
                   </span>
                 {% endif %}

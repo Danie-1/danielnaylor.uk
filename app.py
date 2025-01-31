@@ -61,39 +61,15 @@ def flashcards(course_code: str):
     return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
 
 
-@app.route("/notes_old/")
-def notes_home_old():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_old.html", terms=term_list)
-
-
 @app.route("/notes/")
 def notes_home():
     term_list = [term for year in get_years() for term in year.get_terms()]
     return render_template("notes.html", terms=term_list)
 
 
-@app.route("/notes_test/")
-def notes_home_test():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_test.html", terms=term_list)
-
-
-@app.route("/notes_test2/")
-def notes_home_test2():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_test2.html", terms=term_list)
-
-
-@app.route("/notes_test3/")
-def notes_home_test3():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_test3.html", terms=term_list)
-
-
 @app.route("/")
 def home():
-    return send_file("./templates/home.html")
+    return render_template("home_old.html")
 
 
 if __name__ == "__main__":
