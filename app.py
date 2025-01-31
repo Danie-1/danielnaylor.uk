@@ -36,6 +36,11 @@ def notes_html(year: str, term: str, course: str, html_file: str):
     return send_file(html_url_to_file_url(year, term, course) / f"HTML/{html_file}")
 
 
+@app.route("/notes/<year>/<term>/<course>/images/<image_name>")
+def notes_html_images(year: str, term: str, course: str, image_name: str):
+    return send_file(html_url_to_file_url(year, term, course) / f"HTML/images/{image_name}")
+
+
 @app.route("/<alias>")
 def course_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
