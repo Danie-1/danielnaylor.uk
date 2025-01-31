@@ -67,12 +67,6 @@ def notes_home():
     return render_template("notes_home.html", terms=term_list)
 
 
-@app.route("/notes_alt/")
-def notes_home_alt():
-    term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_home_alt.html", terms=term_list)
-
-
 @app.route("/")
 def home():
     return render_template("home.html")
