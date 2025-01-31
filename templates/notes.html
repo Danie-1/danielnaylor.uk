@@ -2,13 +2,17 @@
 {% block styles %}
 {{ super() }}
 <style>
+  :root {
+    --light-gray: #AAAAAA;
+    --extra-light-gray: #EEEEEE;
+  }
   .notes-button-padding {
     padding-left: calc(2rem) !important;
   }
   .btn-primary.disabled {
-    color: #AAAAAA;
-    background-color: #FFFFFF;
-    border: var(--bs-btn-border-width) solid #AAAAAA;
+    color: var(--light-gray);
+    background-color: white;
+    border: var(--bs-btn-border-width) solid var(--light-gray);
   }
   .custom-shadow {
      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -20,6 +24,10 @@
     .flashcards-button {
       padding-left: 0.375rem !important;
     }
+  }
+  .active-grey:active {
+    background-color: var(--extra-light-gray);
+    color: black;
   }
 </style>
 {% endblock %}
@@ -39,49 +47,19 @@
             </div>
 
             <div class="row m-0 p-1">
-              <div class="btn-group col-12 col-md-6 pb-2 pb-md-0 px-1 notes-button" style="position: relative">
-                {% if course.notes_exist %}
-                  <a type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} p-1 py-md-1" href="{{ course.pdf_url() }}">
-                    Notes
-                  </a>
-                {% else %}
-                  <span type="button" class="fw-bold btn btn-primary {% if course.html_exists %} notes-button-padding {% endif %} disabled p-1 py-md-0">
-                    Notes
-                  </span>
-                {% endif %}
-                {% if course.html_exists %}
-                  <button type="button" class="fw-bold btn btn-primary dropdown-toggle dropdown-toggle-split p-1" data-bs-toggle="dropdown" aria-expanded="false" style="max-width: 2rem;">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      {% if course.notes_exist %}
-                        <a class="dropdown-item" href="{{ course.pdf_url()}}">PDF</a>
-                      {% else %}
-                        <span class="dropdown-item disabled">PDF</span>
-                      {% endif %}
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                      {% if course.html_exists %}
-                        <a class="dropdown-item" href="{{ course.html_url()}}">HTML</a>
-                      {% else %}
-                        <span class="dropdown-item disabled">HTML</span>
-                      {% endif %}
-                    </li>
-                    <li>
-                      {% if course.epub_exists %}
-                        <a class="dropdown-item" href="{{ course.epub_url()}}">EPUB</a>
-                      {% else %}
-                        <span class="dropdown-item disabled">EPUB</span>
-                      {% endif %}
-                    </li>
-                  </ul>
-                {% endif %}
+              <div class="btn-group dropdown col-12 col-md-6 pb-2 pb-md-0 px-1 notes-button">
+                <button type="button" class="fw-bold btn btn-primary dropdown-toggle px-1 py-0 py-md-1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Notes
+                </button>
+                <div class="dropdown-menu">
+                  <a {% if course.notes_exist %}class="dropdown-item active-grey" href="{{ course.pdf_url() }}"{% else %}class="dropdown-item active-grey disabled"{% endif %}>PDF</a>
+                  <a {% if course.html_exists %}class="dropdown-item active-grey" href="{{ course.html_url() }}"{% else %}class="dropdown-item active-grey disabled"{% endif %}>HTML</a>
+                  <a {% if course.epub_exists %}class="dropdown-item active-grey" href="{{ course.epub_url() }}"{% else %}class="dropdown-item active-grey disabled"{% endif %}>EPUB</a>
+                </div>
               </div>
 
               <div class="btn-group col-12 col-md-6 px-1 flashcards-button">
-                <a type="button" class="fw-bold btn btn-primary p-1{% if not course.flashcards_exist %} disabled{% endif %}"{% if course.flashcards_exist %} href="{{ course.flashcards_url() }}"{% endif %}>Flashcards</a>
+                <a type="button" class="fw-bold btn btn-primary px-1 py-0 py-md-1{% if not course.flashcards_exist %} disabled{% endif %}"{% if course.flashcards_exist %} href="{{ course.flashcards_url() }}"{% endif %}>Flashcards</a>
               </div>
             </div>
           </div>
