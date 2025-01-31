@@ -36,7 +36,7 @@
   <div class="container-lg">
     <h1 class="text-center h1">Maths Notes</h1>
     {% for term in terms %}
-      <h2 class="text-center h2">{{ term.part.part_name }} {{ term.term_name }}</h2>
+      <h2 class="text-center h2 pt-3">{{ term.part.part_name }} {{ term.term_name }}</h2>
       <div class="row px-1 px-sm-2 px-md-3">
         {% for course in term.get_courses() %}
         <div class="col-6 col-xxl-3 px-1 px-sm-2 px-md-3 py-1 py-sm-2">
