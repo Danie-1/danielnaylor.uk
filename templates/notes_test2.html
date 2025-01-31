@@ -17,9 +17,6 @@
   .custom-shadow {
      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
-  .btn {
-    font-weight: bold;
-  }
   @media (min-width: 768px) {
     .notes-button {
       padding-right: 0.375rem !important;
@@ -44,20 +41,20 @@
 
 {% block content %}
   <div class="container-lg">
-    <h1 class="text-center">Maths Notes</h1>
+    <h1 class="text-center fw-bold pt-4">Maths Notes</h1>
     {% for term in terms %}
-      <h2 class="text-center pt-3">{{ term.part.part_name }} {{ term.term_name }}</h2>
+      <h2 class="text-center pt-3 fw-bold ">{{ term.part.part_name }} {{ term.term_name }}</h2>
       <div class="row px-1 px-md-3">
         {% for course in term.get_courses() %}
         <div class="col-6 col-xxl-3 px-2 px-md-3 py-2">
           <div class="mx-0 px-1 pb-2 pt-2 rounded-3 rounded-sm-4 grid row custom-shadow h-100 d-flex flex-column">
             <div class="text-center col-12 flex-fill d-flex align-items-center pb-1">
-              <h6 class="m-auto">{{ course.course_name }}</h6>
+              <h6 class="m-auto fw-bold">{{ course.course_name }}</h6>
             </div>
 
             <div class="row m-0 p-1">
               <div class="btn-group dropdown col-12 col-md-6 pb-2 pb-md-0 px-1 notes-button">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-right-align p-1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="fw-bold btn btn-primary dropdown-toggle dropdown-toggle-right-align p-1" data-bs-toggle="dropdown" aria-expanded="false">
                   Notes
                 </button>
                 <div class="dropdown-menu">
@@ -68,7 +65,7 @@
               </div>
 
               <div class="btn-group col-12 col-md-6 px-1 flashcards-button">
-                <a type="button" class="btn btn-primary p-1{% if not course.flashcards_exist %} disabled{% endif %}"{% if course.flashcards_exist %} href="{{ course.flashcards_url() }}"{% endif %}>Flashcards</a>
+                <a type="button" class="fw-bold btn btn-primary p-1{% if not course.flashcards_exist %} disabled{% endif %}"{% if course.flashcards_exist %} href="{{ course.flashcards_url() }}"{% endif %}>Flashcards</a>
               </div>
             </div>
           </div>
