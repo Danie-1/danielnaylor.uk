@@ -7,7 +7,6 @@ from flask_bootstrap import Bootstrap5
 
 from generate_webpage import (
     BASE_FOLDER,
-    generate_notes_homepage,
     get_course_from_alias,
     get_course_from_course_code,
     get_years,
@@ -64,13 +63,14 @@ def flashcards(course_code: str):
 
 @app.route("/notes_old/")
 def notes_home():
-    return generate_notes_homepage()
+    term_list = [term for year in get_years() for term in year.get_terms()]
+    return render_template("notes_old.html", terms=term_list)
 
 
 @app.route("/notes/")
 def notes_test():
     term_list = [term for year in get_years() for term in year.get_terms()]
-    return render_template("notes_test.html", terms=term_list)
+    return render_template("notes.html", terms=term_list)
 
 
 @app.route("/")

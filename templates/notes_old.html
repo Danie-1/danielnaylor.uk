@@ -1,0 +1,266 @@
+<!DOCTYPE html><html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family:Sans-Serif;
+  margin: 0;
+}
+h1 {
+  margin: 10px 0px;
+  text-align:center;
+}
+h2 {
+  margin: 0px 0px;
+  text-align:center;
+  grid-column-start:1;
+  grid-column-end:3;
+}
+h3 {
+  margin: 10px 0px;
+}
+.topics {
+  display:grid;
+  align-items:center;
+  width:min(90%,700px);
+  margin: 0 auto 0.5rem auto;
+  grid-column-gap:5%;
+  grid-row-gap: 1rem;
+  grid-template-columns: 47.5%;
+}
+.module {
+  text-align:center;
+/*  background-color:#eeeeee;*/
+  background-color:#ffffff;
+  border-radius:10px;
+/*  color:#1188cc;*/
+  color:#000000;
+  padding: 0 5%;
+  width: 90%;
+  height: 100%;
+  margin: 0 0;
+/* box-shadow:rgba(100,100,111,0.2) 0px 29px 0px;*/
+/*  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;*/
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /*white-space: nowrap;*/
+  position: relative;
+}
+.module>div.box>a {
+  /*background-color: #007bff;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.5em;
+  border-radius: 0.25em;
+  border: 1px solid #007bff;
+  vertical-align: middle;
+  display:inline-block
+  color: white;
+  white-space: nowrap;
+  transition: background-color .1s ease-in-out;
+  width: max(5rem, 35%);
+  padding: 2px 5%;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 5px 0;*/
+  border: 1px solid #007bff;
+  width: 100%;
+  display: block;
+  border-radius: 0.25rem;
+  margin: 0 auto;
+  position: relative;
+}
+a.bluebg {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #007bff;
+  line-height: 1.5em;
+}
+div.notes-button {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  width: 100%;
+  display: block;
+  border-radius: 0.25rem;
+  line-height: 1.5em;
+  margin: 0 auto;
+  position: relative;
+}
+
+.module>div.box>a:hover, a.note-link:hover {
+  background-color: #209bff;
+  border: 1px solid #209bff;
+}
+
+@media screen and (max-width: 48rem) {
+h4 {
+  /*font-size: 12px;*/
+  font-size: 1rem;
+  margin: 0.5rem 0px 4.5rem 0px;
+}
+.module>div.h4container {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+.module>div.box {
+  display: grid;
+  /*grid-template-columns: max(47.2%, 100px) max(47.2%, 100px);*/
+  grid-template-columns: 100%;
+  grid-row-gap: 5px;
+  place-items: center;
+  align-items: center;
+  margin: 0px auto 0.75rem auto;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+}
+  a, div.notes-button {
+    margin: auto;
+    min-width: 8rem;
+    max-width: 8rem;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+h4 {
+  /*font-size: 12px;*/
+  font-size: 1.25rem;
+  margin: 0.5rem 0px 3px 0px;
+}
+  .module>div.box {
+      display: grid;
+      /*grid-template-columns: max(47.2%, 100px) max(47.2%, 100px);*/
+      grid-template-columns: repeat(auto-fill, max(47.2%, 8rem));
+      grid-column-gap: 5.6%;
+      grid-row-gap: 5px;
+      place-items: center;
+      align-items: center;
+      margin: 0px auto 0.75rem auto;
+    }
+  .module>div.box>a, div.notes-button {
+    margin-top: 0.25rem;
+  }
+}
+.module>div.box a.disabled {
+  color: #aaaaaa;
+  background-color: #ffffff;
+  border: 1px solid #aaaaaa;
+}
+
+.caret-container {
+  position: absolute;
+  right: 0px;
+  height: calc(100% + 2px);
+  width: 1em;
+  top: -1px;
+  border-left: 1px solid #FFF5;
+}
+
+span.caret {
+  border: 0.3em solid white;
+  border-color: white transparent transparent transparent;
+  width: 0;
+  height: 0;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translate(-44%, -19%);
+  left: 50%;
+}
+
+a.dropdown {
+padding-left: calc(1em + 1px); width: calc(100% - 2em - 3px); float: left; border-radius: 0.25rem 0 0 0.25rem; margin-top: 0.25rem; border: 1px solid #007bff; border-right: none !important;
+}
+
+div.droparr {
+width: 1em; background-color: #007bff; float: right; border: 1px solid #007bff; border-radius: 0 0.25rem 0.25rem 0; height: 1.5em; margin-top: 0.25rem; border-left: none !important; position: relative;
+}
+
+a.dropdown:hover, div.droparr:hover {
+  background-color: #209bff;
+  border: 1px solid #209bff;
+}
+
+div.btn-options {
+  z-index: 100;
+  position: absolute;
+  text-align: left;
+  top: 2.1em;
+  padding: 0.25em 0em;
+  background-color: #FFF;
+  border-radius: 0.25rem;
+  border: 1px solid #EEE;
+  right: 0;
+}
+
+div.btn-options>a {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  box-sizing: border-box;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+}
+
+div.btn-options>:hover {
+  background-color: #EEE;
+}
+
+.invisible {
+  display: none;
+}
+</style>
+<title>Daniel's Cambridge Maths Notes</title>
+  </head>
+<body>
+<h1>Maths Notes</h1>
+
+<div class="topics">
+{% for term in terms %}
+  <h2>{{ term.part.part_name }} {{ term.term_name }}</h2>
+  {% for course in term.get_courses() %}
+    <div class="module">
+      <div class="h4container">
+        <h4>{{ course.course_name }}</h4>
+      </div>
+      <div class="box">
+        {% if course.notes_exist %}
+        {% if course.html_exists %}
+        <div style="width: 100%; position: relative;">
+          <a class="bluebg dropdown" href="{{ course.pdf_url() }}">Notes</a>
+          <div class="droparr" onclick="this.nextElementSibling.classList.toggle('invisible')">
+            <span class="caret"></span>
+          </div>
+          <div class="btn-options invisible">
+	    <a href="{{ course.pdf_url() }}">PDF</a>
+            <br>
+	    <a href="{{ course.html_url() }}">HTML</a>
+            <!-- <br> -->
+            <!-- <a href="#">EPUB</a> -->
+          </div>
+        </div>
+        {% else %}
+	<a class="bluebg" href="{{ course.pdf_url() }}">
+          Notes
+        </a>
+        {% endif %}
+        {% else %}
+        <a class="disabled">Notes</a>
+        {% endif %}
+        {% if course.flashcards_exist %}
+        <a class="bluebg" href="/notes/{{ course.path.name }}.apkg">Flashcards</a>
+        {% else %}
+        <a class="disabled">Flashcards</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endfor %}
+</div>
+</body>
+</html>

@@ -130,15 +130,6 @@ def get_years() -> list[Part]:
     return years
 
 
-def generate_notes_homepage() -> str:
-    term_list = [term for year in get_years() for term in year.get_terms()]
-
-    environment = Environment(loader=FileSystemLoader("templates/"))
-    template = environment.get_template("notes.html")
-
-    return template.render(terms=term_list)
-
-
 def part_to_year_number(part: str) -> str:
     return {
         "IA": "year1",
