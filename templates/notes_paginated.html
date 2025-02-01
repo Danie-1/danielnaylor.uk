@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from 'bootstrap4/utils.html' import render_icon %}
+{% block navbar %}
+  {% include "navbar.html" %}
+  <ul class="pagination justify-content-center w-100 mt-2 mb-2">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">Contents</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+{% endblock %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block headextra %}
+{{ head|safe }}
+{% endblock %}
+{% block content %}
+<div class="html-view">
+{{ content|safe }}
+</div>
+{% endblock %}

@@ -9,4 +9,5 @@ dependencies = [
     "gunicorn>=23.0.0",
     "python-dotenv>=1.0.1",
     "bootstrap-flask>=2.4.1",
+    "beautifulsoup4>=4.12.3",
 ]

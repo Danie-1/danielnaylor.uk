@@ -5,6 +5,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+      {% block headextra %}{% endblock %}
       {% block styles %}
         {{ bootstrap.load_css() }}
         <style>
@@ -70,8 +71,12 @@
     {% endblock %}
   </head>
   <body>
-    {% block navbar %}{% include "navbar.html" %}{% endblock %}
-    <div class="container-md px-4 pb-3">
+    <nav class="navbar sticky-top px-md-3 mb-3">
+      {% block navbar %}
+        {% include "navbar.html" %}
+      {% endblock %}
+    </nav>
+    <div id="content" class="container-md px-4 pb-3">
       {% block content %}{% endblock %}
     </div>
     {% block scripts %}

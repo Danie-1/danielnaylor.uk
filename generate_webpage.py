@@ -81,6 +81,8 @@ class Course:
         return f"/notes/{self.course_code}.apkg"
 
     def html_url(self) -> str:
+        if (self.path / "HTML_paginated").exists():
+            return f"{self.url()}/HTML/{self.course_code}.html"
         return f"{self.url()}/{self.course_code}.html"
 
     @property

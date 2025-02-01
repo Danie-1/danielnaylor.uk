@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, abort, redirect, render_template, send_file
 from flask_bootstrap import Bootstrap5
+from bs4 import BeautifulSoup, Tag
 
 from generate_webpage import (
     BASE_FOLDER,
@@ -35,6 +36,31 @@ def notes_html(year: str, term: str, course: str, html_file: str):
     return send_file(html_url_to_file_url(year, term, course) / f"HTML/{html_file}")
 
 
+@app.route("/notes/<year>/<term>/<course>/HTML/<path:html_file>")
+def notes_html_paginated(year: str, term: str, course: str, html_file: str):
+    file = html_url_to_file_url(year, term, course) / f"HTML_paginated/{html_file}"
+    # if html_file == "CT.css":
+    #     return "\n".join(f".html-view {line}" for line in file.read_text().splitlines() if line.strip() and not line.strip().startswith("/")).replace("body ", ".html-view ")
+    if html_file.endswith("css"):
+        return f"#content{{{file.read_text()}}}".replace("body ", ".html-view ")
+    if not html_file.endswith("html"):
+        return send_file(file)
+    content = file.read_text()
+    # return render_template("notes_paginated.html", content=content)
+    soup = BeautifulSoup(content, features="html.parser")
+    head = soup.find("head")
+    assert isinstance(head, Tag)
+    head.find("title").decompose()
+    body = soup.find("body")
+    assert isinstance(body, Tag)
+    return render_template(
+        "notes_paginated.html",
+        content=body.decode_contents(),
+        head=head.decode_contents(),
+        title=f"{get_course_from_alias(course).course_name} Notes",
+    )
+
+
 @app.route("/<alias>")
 def course_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
@@ -60,6 +86,16 @@ def flashcards(course_code: str):
 def notes_home():
     term_list = [term for year in get_years() for term in year.get_terms()]
     return render_template("notes_home.html", terms=term_list)
+
+
+# @app.route("/blog/")
+# def blog_home():
+#     return render_template("blog_home.html")
+
+
+# @app.route("/blog/<path:blog_path>")
+# def blog(blog_path: str):
+#     return redirect(url_for("blog_home"))
 
 
 @app.route("/")
