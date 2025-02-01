@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
+import re
 
 from dotenv import load_dotenv
-from flask import Flask, abort, redirect, render_template, send_file
+from flask import Flask, Response, abort, redirect, render_template, send_file
 from flask_bootstrap import Bootstrap5
 from bs4 import BeautifulSoup, Tag
 
@@ -39,10 +40,11 @@ def notes_html(year: str, term: str, course: str, html_file: str):
 @app.route("/notes/<year>/<term>/<course>/HTML/<path:html_file>")
 def notes_html_paginated(year: str, term: str, course: str, html_file: str):
     file = html_url_to_file_url(year, term, course) / f"HTML_paginated/{html_file}"
-    # if html_file == "CT.css":
-    #     return "\n".join(f".html-view {line}" for line in file.read_text().splitlines() if line.strip() and not line.strip().startswith("/")).replace("body ", ".html-view ")
     if html_file.endswith("css"):
-        return f"#content{{{file.read_text()}}}".replace("body ", ".html-view ")
+        return Response(
+            re.sub(r"body {([^}]*)}", r"\1", f"#content {{ {file.read_text()} }}"),
+            mimetype="text/css",
+        )
     if not html_file.endswith("html"):
         return send_file(file)
     content = file.read_text()
