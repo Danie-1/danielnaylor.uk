@@ -1,5 +1,5 @@
 {% from 'bootstrap4/nav.html' import render_nav_item %}
-<nav class="navbar navbar-expand-sm sticky-top px-md-3">
+<nav class="navbar navbar-expand sticky-top px-md-3">
   <div class="container-md px-4">
     <a class="navbar-brand" href="/">Daniel Naylor</a>
     <button class="navbar-toggler border-0 shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
       <span></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+      <ul class="navbar-nav me-auto mb-0">
         {{ render_nav_item("home", "Home", _use_li=True) }}
         {{ render_nav_item("notes_home", "Notes", _use_li=True) }}
       </ul>
