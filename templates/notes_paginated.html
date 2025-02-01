@@ -1,25 +1,58 @@
 {% extends "base.html" %}
 {% from 'bootstrap4/utils.html' import render_icon %}
+
 {% block navbar %}
   {% include "navbar.html" %}
-  <ul class="pagination justify-content-center w-100 mt-2 mb-2">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">Contents</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
+  {% if include_navigation %}
+    <ul class="pagination justify-content-center w-100 mt-2 mb-2">
+      <li class="page-item{% if not has_previous %} disabled{% endif %}">
+        {% if has_previous %}
+          <a class="page-link" href="{{ previous_link }}" tabindex="-1">Previous</a>
+        {% else %}
+          <a class="page-link" tabindex="-1">Previous</a>
+        {% endif %}
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ course_code }}.html">Contents</a>
+      </li>
+      <li class="page-item{% if not has_next %} disabled{% endif %}">
+        {% if has_next %}
+          <a class="page-link" href="{{ next_link }}" tabindex="-1">Next</a>
+        {% else %}
+          <a class="page-link" tabindex="-1">Next</a>
+        {% endif %}
+      </li>
+    </ul>
+  {% endif %}
 {% endblock %}
-{% block title %}
-{{ title }}
+
+{% block scrollpadding %}
+  html {
+    scroll-padding-top: 8.375rem;
+  }
 {% endblock %}
-{% block headextra %}
-{{ head|safe }}
+
+{% block styles %}
+{{ super() }}
+<style>
+[data-bs-theme="dark"] {
+  img[src^="{{ course_code }}"] {
+    filter: invert(1);
+  }
+}
+.paginated-make4ht {
+  font-family: "Computer Modern Serif", serif;
+  text-align: justify;
+}
+</style>
 {% endblock %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block headextra %}{{ head|safe }}{% endblock %}
+
 {% block content %}
-{{ content|safe }}
+<div class="paginated-make4ht">
+  {{ content|safe }}
+</div>
 {% endblock %}
