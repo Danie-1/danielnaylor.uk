@@ -53,9 +53,9 @@ def fix_paginated_html(course: str, content: str) -> str:
     while crosslinks := soup.find("div", {"class": "crosslinks"}):
         crosslinks.decompose()
 
-    for maybe_delete in soup.select("p.noindent"):
-        if maybe_delete.decode_contents().strip() == "˙":
-            maybe_delete.decompose()
+    # for maybe_delete in soup.select("p.noindent"):
+    #     if maybe_delete.decode_contents().strip() == "˙":
+    #         maybe_delete.decompose()
 
     return render_template(
         "notes_paginated.html",
