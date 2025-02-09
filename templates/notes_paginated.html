@@ -37,7 +37,13 @@
 <style>
 [data-bs-theme="dark"] {
   img[src^="{{ course_code }}"] {
-    filter: invert(1);
+    filter: invert(1) hue-rotate(180deg);
+  }
+  img[alt="PIC"] {
+    filter: invert(1) hue-rotate(180deg);
+    width: unset;
+    height: unset;
+    max-width: 60%;
   }
 }
 [display="true"].MathJax {
