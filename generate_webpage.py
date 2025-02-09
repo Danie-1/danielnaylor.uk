@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 import functools
+import os
 from dataclasses import dataclass
 from pathlib import Path
-import os
 
 from dotenv import load_dotenv
-from jinja2 import Environment, FileSystemLoader
-
 
 load_dotenv()
 
