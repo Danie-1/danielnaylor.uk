@@ -21,19 +21,27 @@ def html_url_to_file_url(year: str, term: str, course: str) -> Path:
 
 @app.route("/notes/<year>/<term>/<course>/<pdf_file>.pdf")
 def notes_pdf(year: str, term: str, course: str, pdf_file: str):
-    return send_file(html_url_to_file_url(year, term, course) / f"{pdf_file}.pdf")
+    file = html_url_to_file_url(year, term, course) / f"{pdf_file}.pdf"
+    if not file.exists():
+        return abort(404)
+    return send_file(file)
 
 
 @app.route("/notes/<year>/<term>/<course>/<path:html_file>")
 def notes_html(year: str, term: str, course: str, html_file: str):
     if html_file == f"{course}.html":
         html_file = f"{course}_final.html"
-    return send_file(html_url_to_file_url(year, term, course) / f"HTML/{html_file}")
+    file = html_url_to_file_url(year, term, course) / f"HTML/{html_file}"
+    if not file.exists:
+        return abort(404)
+    return send_file(file)
 
 
 @app.route("/notes/<year>/<term>/<course>/HTML/<path:html_file>")
 def notes_html_paginated(year: str, term: str, course: str, html_file: str):
     file = html_url_to_file_url(year, term, course) / f"HTML_paginated/{html_file}"
+    if not file.exists():
+        return abort(404)
     if html_file.endswith("css"):
         replacements = [
             (r"body {([^}]*)}", ""),
