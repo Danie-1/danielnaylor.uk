@@ -130,21 +130,21 @@ def get_years() -> list[Part]:
     return years
 
 
-def part_to_year_number(part: str) -> str:
+def part_to_year_number(part: str) -> str | None:
     return {
         "IA": "year1",
         "IB": "year2",
         "II": "year3",
         "III": "year4",
-    }[part]
+    }.get(part)
 
 
-def term_name_to_number(term_name: str) -> str:
+def term_name_to_number(term_name: str) -> str | None:
     return {
         "Michaelmas": "term1",
         "Lent": "term2",
         "Easter": "term3",
-    }[term_name]
+    }.get(term_name)
 
 
 def get_courses() -> list[Course]:
