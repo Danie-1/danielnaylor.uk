@@ -40,7 +40,7 @@ def notes_html(year: str, term: str, course: str, html_file: str):
     if not (folder := html_url_to_file_url(year, term, course)):
         return abort(404)
     file = folder / f"HTML/{html_file}"
-    if not file.exists:
+    if not file.exists():
         return abort(404)
     return send_file(file)
 
