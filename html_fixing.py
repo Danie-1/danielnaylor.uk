@@ -9,6 +9,12 @@ from generate_webpage import get_course_from_alias
 
 @functools.cache
 def fix_paginated_html(course: str, content: str) -> str:
+    content = re.sub(
+        r"((?:Corollary|Theorem|Proposition|Lemma|Definition|Example|Remark)\W+)(<a[^>]+>)",
+        r"\2\1",
+        content,
+    )
+
     soup = BeautifulSoup(content, features="html.parser")
 
     head = soup.find("head")
