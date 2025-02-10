@@ -90,6 +90,7 @@ def flashcards(course_code: str):
 
 @app.route("/notes/")
 def notes_home():
+    1 / 0
     term_list = [term for year in get_years() for term in year.get_terms()]
     return render_template("notes_home.html", terms=term_list)
 
@@ -112,6 +113,11 @@ def home():
 @app.errorhandler(404)
 def error_404(error):
     return render_template("404.html")
+
+
+@app.errorhandler(500)
+def erorr_500(error):
+    return render_template("500.html")
 
 
 if __name__ == "__main__":
