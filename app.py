@@ -91,6 +91,11 @@ def home():
     return render_template("home.html")
 
 
+@app.errorhandler(404)
+def error_404(error):
+    return render_template("404.html")
+
+
 if __name__ == "__main__":
     load_dotenv()
     debug = os.environ.get("FLASK_DEBUG") is not None
