@@ -85,7 +85,7 @@ def course_html_redirect(alias: str):
 def flashcards(course_code: str):
     if not get_course_from_course_code(course_code):
         return abort(404)
-    return send_file(BASE_FOLDER / f"{course_code.upper()}.apkg")
+    return send_file(BASE_FOLDER / f"{course_code}.apkg")
 
 
 @app.route("/notes/")
