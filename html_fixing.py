@@ -4,8 +4,6 @@ import re
 from bs4 import BeautifulSoup, Tag
 from flask import render_template
 
-from generate_webpage import get_course_from_alias
-
 
 @functools.cache
 def fix_paginated_html(course: str, content: str) -> str:
@@ -19,8 +17,7 @@ def fix_paginated_html(course: str, content: str) -> str:
 
     head = soup.find("head")
     assert isinstance(head, Tag)
-    # head.find("title").decompose()
-    #
+
     body = soup.find("body")
     assert isinstance(body, Tag)
 
@@ -67,7 +64,6 @@ def fix_paginated_html(course: str, content: str) -> str:
         "notes_paginated.html",
         content=body.decode_contents(),
         head=head.decode_contents(),
-        title=f"{get_course_from_alias(course).course_name} Notes",
         course_code=course,
         include_navigation=include_navigation,
         has_previous=has_previous,
