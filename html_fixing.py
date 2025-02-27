@@ -19,8 +19,8 @@ def fix_paginated_html(course: str, content: str) -> str:
 
     head = soup.find("head")
     assert isinstance(head, Tag)
-    head.find("title").decompose()
-
+    # head.find("title").decompose()
+    #
     body = soup.find("body")
     assert isinstance(body, Tag)
 
