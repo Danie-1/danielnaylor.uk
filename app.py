@@ -1,5 +1,6 @@
 import os
 import re
+import pickle
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -49,6 +50,15 @@ def notes_html(year: str, term: str, course: str, html_file: str):
 def notes_html_paginated(year: str, term: str, course: str, html_file: str):
     if not (folder := html_url_to_file_url(year, term, course)):
         return abort(404)
+    file_processed = folder / f"HTML_paginated/{html_file}_processed"
+    if file_processed.exists():
+        with open(file_processed, "rb") as f:
+            data = pickle.load(f)
+            return render_template(
+                "notes_paginated.html",
+                course_code=course,
+                **data
+            )
     file = folder / f"HTML_paginated/{html_file}"
     if not file.exists():
         return abort(404)
