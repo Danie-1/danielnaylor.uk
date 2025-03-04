@@ -6,7 +6,7 @@
 {{ super() }}
 <style>
   li.list-group-item>a {
-    color: initial;
+    color: unset;
     text-decoration: none;
     margin-left: 0.5rem;
   }
@@ -15,7 +15,7 @@
     text-decoration: revert;
   }
   li.list-group-item>a:hover:visited {
-    color: blue;
+    color: var(--bs-link-color);
   }
 </style>
 {% endblock %}
