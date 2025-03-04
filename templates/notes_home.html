@@ -42,7 +42,7 @@
 {% block content %}
   <h1 class="text-center fw-bold">Maths Notes</h1>
   {% for term in terms %}
-    <h2 class="text-center pt-3 fw-bold">{{ term.part.part_name }} {{ term.term_name }}</h2>
+    <h2 class="text-center pt-3 fw-bold" id="{{ term.part.part_name }}_{{ term.term_name[0] }}">{{ term.part.part_name }} {{ term.term_name }}</h2>
     <div class="row px-1 px-md-3">
       {% for course in term.get_courses() %}
       <div class="col-6 col-xxl-3 px-2 px-md-3 py-2">
