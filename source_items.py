@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import functools
 import os
 from pathlib import Path
@@ -99,10 +100,14 @@ class Item:
         if self.is_dir():
             return self.path.name + "/"
         return self.path.name
-        return self.path.name + "/"
 
     def icon_name(self) -> str:
         if self.is_dir():
             return "folder-fill"
         else:
             return EXTENSION_TO_ICON.get(self.file_extension(), "file-earmark")
+
+    def last_edited(self) -> str:
+        edited_unix_timestamp = os.path.getmtime(self.path)
+        edited_datetime = datetime.datetime.fromtimestamp(edited_unix_timestamp)
+        return f"Edited: {edited_datetime.strftime('%a %d %b %Y')}"

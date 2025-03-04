@@ -48,7 +48,6 @@ def notes_sources(year: str, term: str, course_code: str, file_path: str):
     if not (course := get_course_from_course_code(course_code)):
         return abort(404)
     file = folder / file_path
-    print(file_path)
     if file.is_dir():
         if not file_path.endswith("/") and not file_path == "":
             return redirect(
@@ -60,11 +59,26 @@ def notes_sources(year: str, term: str, course_code: str, file_path: str):
                     file_path=file_path + "/",
                 )
             )
+        term_folder = folder.parent
+        relative_path = os.path.relpath(file, term_folder)
+        base_url = url_for(
+            "notes_sources", year=year, term=term, course_code=course_code
+        )
+        url_extra = ""
+        breadcrumbs = [
+            (
+                p,
+                base_url
+                + (url_extra := url_extra + (f"{p}/" if p != course_code else "")),
+            )
+            for p in relative_path.split("/")
+        ]
         return render_template(
             "sources_dir.html",
             course_name=course.course_name,
             folder_name=f"{course_code}/{file_path}",
             items=sorted(Item(i) for i in file.glob("*")),
+            breadcrumbs=breadcrumbs,
         )
     if file_path.endswith("/"):
         return redirect(

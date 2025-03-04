@@ -1,33 +1,57 @@
 {% extends "base.html" %}
 {% from 'bootstrap4/utils.html' import render_icon %}
+{% from 'bootstrap4/nav.html' import render_breadcrumb_item %}
+
 {% block title %}{{ course_name }} Sources{% endblock %}
 
 {% block styles %}
 {{ super() }}
 <style>
-  li.list-group-item>a {
+  li.list-group-item a {
     color: unset;
     text-decoration: none;
     margin-left: 0.5rem;
+    width: calc(100% - 2rem);
+    margin-right: -1rem;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
   }
-  li.list-group-item>a:hover {
+  li.list-group-item a:hover {
     color: var(--bs-link-color);
     text-decoration: revert;
   }
-  li.list-group-item>a:hover:visited {
+  li.list-group-item a:hover:visited {
     color: var(--bs-link-color);
   }
 </style>
 {% endblock %}
 
 {% block content %}
-  <h1>{{ folder_name }}</h1>
+  <nav style="--bs-breadcrumb-divider: '/';" class="bg-transparent h3 m-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs[:-1] %}
+      <li class="breadcrumb-item"><a href="{{ breadcrumb[1] }}">{{ breadcrumb[0] }}</a></li>
+      {% endfor %}
+      <li class="breadcrumb-item active" aria-current="page">{{ breadcrumbs[-1][0] }}</li>
+      <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
+      <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+      <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+    </ol>
+  </nav>
   <ul class="list-group">
   {% for item in items %}
     {% if not item.should_exclude() %}
       <li class="list-group-item">
-        {{ render_icon(item.icon_name()) }}
-        <a href="{{ item.url() }}">{{ item }}</a>
+        <div class="row">
+        <span class="col-12 col-sm-6 col-md-8">
+          {{ render_icon(item.icon_name()) }}
+          <a href="{{ item.url() }}">{{ item }}</a>
+        </span>
+        <span class="col-sm-6 col-md-4 text-secondary d-none d-sm-block">{{ item.last_edited() }}</span>
+        </div>
       </li>
     {% endif %}
   {% endfor %}
