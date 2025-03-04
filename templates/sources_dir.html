@@ -1,12 +1,34 @@
 {% extends "base.html" %}
+{% from 'bootstrap4/utils.html' import render_icon %}
 {% block title %}{{ course_name }} Sources{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+  li.list-group-item>a {
+    color: initial;
+    text-decoration: none;
+    margin-left: 0.5rem;
+  }
+  li.list-group-item>a:hover {
+    color: revert;
+    text-decoration: revert;
+  }
+  li.list-group-item>a:hover:visited {
+    color: blue;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
   <h1>{{ folder_name }}</h1>
-  <ul class="list-unstyled">
+  <ul class="list-group">
   {% for item in items %}
     {% if not item.should_exclude() %}
-      <li><a href="{{ item.url() }}">{{ item }}</a></li>
+      <li class="list-group-item">
+        {{ render_icon(item.icon_name()) }}
+        <a href="{{ item.url() }}">{{ item }}</a>
+      </li>
     {% endif %}
   {% endfor %}
   </ul>

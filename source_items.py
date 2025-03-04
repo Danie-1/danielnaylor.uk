@@ -37,6 +37,18 @@ EXCLUDED_EXTENSIONS = (
 )
 
 
+EXTENSION_TO_ICON = {
+    ".tex": "braces",
+    ".4ht": "braces",
+    ".png": "image",
+    ".html": "filetype-html",
+    ".svg": "filetype-svg",
+    ".css": "filetype-css",
+    ".html_processed": "file-earmark-binary",
+    ".txt": "filetype-txt",
+}
+
+
 @functools.total_ordering
 class Item:
     def __init__(self, path: Path) -> None:
@@ -88,3 +100,9 @@ class Item:
             return self.path.name + "/"
         return self.path.name
         return self.path.name + "/"
+
+    def icon_name(self) -> str:
+        if self.is_dir():
+            return "folder-fill"
+        else:
+            return EXTENSION_TO_ICON.get(self.file_extension(), "file-earmark")
