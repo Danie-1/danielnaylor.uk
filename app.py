@@ -4,13 +4,19 @@ import pickle
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, Response, abort, redirect, render_template, send_file
+from flask import Flask, Response, abort, redirect, render_template, send_file, url_for
 from flask_bootstrap import Bootstrap5
 
-from generate_webpage import (BASE_FOLDER, get_course_from_alias,
-                              get_course_from_course_code, get_years,
-                              part_to_year_number, term_name_to_number)
+from generate_webpage import (
+    BASE_FOLDER,
+    get_course_from_alias,
+    get_course_from_course_code,
+    get_years,
+    part_to_year_number,
+    term_name_to_number,
+)
 from html_fixing import fix_paginated_html
+from source_items import Item
 
 app = Flask(__name__)
 Bootstrap5(app)
@@ -34,6 +40,51 @@ def notes_pdf(year: str, term: str, course: str, pdf_file: str):
     return send_file(file)
 
 
+@app.route("/notes/<year>/<term>/<course_code>/sources/", defaults={"file_path": ""})
+@app.route("/notes/<year>/<term>/<course_code>/sources/<path:file_path>")
+def notes_sources(year: str, term: str, course_code: str, file_path: str):
+    if not (folder := html_url_to_file_url(year, term, course_code)):
+        return abort(404)
+    if not (course := get_course_from_course_code(course_code)):
+        return abort(404)
+    file = folder / file_path
+    print(file_path)
+    if file.is_dir():
+        if not file_path.endswith("/") and not file_path == "":
+            return redirect(
+                url_for(
+                    "notes_sources",
+                    year=year,
+                    term=term,
+                    course_code=course_code,
+                    file_path=file_path + "/",
+                )
+            )
+        return render_template(
+            "sources_dir.html",
+            course_name=course.course_name,
+            folder_name=f"{course_code}/{file_path}",
+            items=sorted(Item(i) for i in file.glob("*")),
+        )
+    if file_path.endswith("/"):
+        return redirect(
+            url_for(
+                "notes_sources",
+                year=year,
+                term=term,
+                course_code=course_code,
+                file_path=file_path.rstrip("/"),
+            )
+        )
+    base, ext = os.path.splitext(file.name)
+    if ext in (".tex", ".html", ".css", ".txt", ".4ht") or base in (
+        ".ignore",
+        "htmlyes",
+    ):
+        return send_file(file, mimetype="text/plain")
+    return send_file(file)
+
+
 @app.route("/notes/<year>/<term>/<course>/<path:html_file>")
 def notes_html(year: str, term: str, course: str, html_file: str):
     if html_file == f"{course}.html":
@@ -54,11 +105,7 @@ def notes_html_paginated(year: str, term: str, course: str, html_file: str):
     if file_processed.exists():
         with open(file_processed, "rb") as f:
             data = pickle.load(f)
-            return render_template(
-                "notes_paginated.html",
-                course_code=course,
-                **data
-            )
+            return render_template("notes_paginated.html", course_code=course, **data)
     file = folder / f"HTML_paginated/{html_file}"
     if not file.exists():
         return abort(404)

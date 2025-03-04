@@ -90,6 +90,9 @@ class Course:
     def epub_url(self) -> str:
         return f"{self.url()}/{self.course_code}.epub"
 
+    def sources_url(self) -> str:
+        return f"{self.url()}/sources/"
+
     def __le__(self, other: Course) -> bool:
         return self.path.name <= other.path.name
 

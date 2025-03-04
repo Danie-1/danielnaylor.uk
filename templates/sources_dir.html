@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ course_name }} Sources{% endblock %}
+
+{% block content %}
+  <h1>{{ folder_name }}</h1>
+  <ul class="list-unstyled">
+  {% for item in items %}
+    {% if not item.should_exclude() %}
+      <li><a href="{{ item.url() }}">{{ item }}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}

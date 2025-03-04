@@ -59,6 +59,7 @@
               <div class="dropdown-menu">
                 <a {% if course.notes_exist %}class="dropdown-item active-grey" href="{{ course.pdf_url() }}"{% else %}class="dropdown-item active-grey disabled"{% endif %}>PDF</a>
                 <a {% if course.html_exists %}class="dropdown-item active-grey" href="{{ course.html_url() }}"{% else %}class="dropdown-item active-grey disabled"{% endif %}>HTML</a>
+                <a class="dropdown-item active-grey" href="{{ course.sources_url() }}">Sources</a>
               </div>
             </div>
 
