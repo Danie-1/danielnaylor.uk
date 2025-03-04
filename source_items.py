@@ -16,6 +16,7 @@ EXCLUDED_EXTENSIONS = (
     ".flashcardout",
     ".fls",
     ".log",
+    ".maf",
     ".mtc",
     ".mtc0",
     ".out",
