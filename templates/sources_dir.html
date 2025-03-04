@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block content %}
-  <nav style="--bs-breadcrumb-divider: '/';" class="bg-transparent h3 m-3" aria-label="breadcrumb">
+  <nav class="bg-transparent h3 m-3" aria-label="breadcrumb">
     <ol class="breadcrumb">
       {% for breadcrumb in breadcrumbs[:-1] %}
       <li class="breadcrumb-item"><a href="{{ breadcrumb[1] }}">{{ breadcrumb[0] }}</a></li>
