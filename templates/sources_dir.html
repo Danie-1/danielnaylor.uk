@@ -11,7 +11,7 @@
     color: unset;
     text-decoration: none;
     margin-left: 0.5rem;
-    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
     margin-right: -1rem;
     display: inline-block;
     vertical-align: middle;
@@ -36,9 +36,6 @@
       <li class="breadcrumb-item"><a href="{{ breadcrumb[1] }}">{{ breadcrumb[0] }}</a></li>
       {% endfor %}
       <li class="breadcrumb-item active" aria-current="page">{{ breadcrumbs[-1][0] }}</li>
-      <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-      <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
-      <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
     </ol>
   </nav>
   <ul class="list-group">
