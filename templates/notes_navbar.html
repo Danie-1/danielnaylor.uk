@@ -1,0 +1,9 @@
+{% extends "navbar.html" %}
+
+{% block navbar_right %}
+<form class="d-flex" role="search" action="/notes/search" method="get">
+  <!-- <input class="form-control me-2" type="search" placeholder="Search HTML notes" aria-label="Search"> -->
+  <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+  {{ g.search_form.q(class="form-control me-2", placeholder="Search HTML notes") }}
+</form>
+{% endblock %}

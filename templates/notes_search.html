@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+  {% include "notes_navbar.html" %}
+{% endblock %}
+
+{% block title %}{{ query }} - Searching HTML notes{% endblock %}
+
+{% macro print_result(result) %}
+<div class="col-12 col-sm-6 col-lg-4 px-1 py-1">
+  <div class="px-2 p-1 card h-100">
+    <div class="card-body p-2">
+      <h5 class="card-title"><a href="{{ result.href }}">{{ result.title }}</a></h5>
+      <p class="card-text">{{ result.highlighted }}</p>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% block content %}
+  <h1 class="mb-4">Search results for "{{ query }}":</h1>
+  <div class="row">
+  {% for result in results %}
+    {{ print_result(result) }}
+  {% endfor %}
+  </div>
+{% endblock %}

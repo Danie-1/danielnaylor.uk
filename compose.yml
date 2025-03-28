@@ -1,0 +1,39 @@
+name: danielnaylor.uk
+
+services:
+  site:
+    build: .
+    ports:
+      - "127.0.0.1:$PORT:8000"
+    volumes:
+      - type: bind
+        source: $BASE_FOLDER
+        target: /base_folder
+    env_file:
+      - path: .env
+    depends_on:
+      - search
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: templates
+    #       target: /app/templates
+    #     - action: rebuild
+    #       path: .
+  search:
+    build: sonic
+    volumes:
+      - type: bind
+        source: docker-data/sonic
+        target: /usr/src/sonic/data
+  reindex:
+    build: .
+    command: uv run python index_htmls.py
+    volumes:
+      - type: bind
+        source: $BASE_FOLDER
+        target: /base_folder
+    env_file:
+      - path: .env
+    depends_on:
+      - search

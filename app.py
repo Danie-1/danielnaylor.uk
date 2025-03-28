@@ -1,11 +1,24 @@
 import os
-import re
 import pickle
+import re
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, Response, abort, redirect, render_template, send_file, url_for
+from flask import (
+    Flask,
+    Response,
+    abort,
+    g,
+    redirect,
+    render_template,
+    request,
+    send_file,
+    url_for,
+)
 from flask_bootstrap import Bootstrap5
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 from generate_webpage import (
     BASE_FOLDER,
@@ -16,10 +29,27 @@ from generate_webpage import (
     term_name_to_number,
 )
 from html_fixing import fix_paginated_html
+from search import search_htmls
 from source_items import Item
 
 app = Flask(__name__)
 Bootstrap5(app)
+
+
+class SearchForm(FlaskForm):
+    q = StringField("Search", validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        if "formdata" not in kwargs:
+            kwargs["formdata"] = request.args
+        if "meta" not in kwargs:
+            kwargs["meta"] = {"csrf": False}
+        super(SearchForm, self).__init__(*args, **kwargs)
+
+
+@app.before_request
+def before_request():
+    g.search_form = SearchForm()
 
 
 def html_url_to_file_url(year: str, term: str, course: str) -> Path | None:
@@ -163,6 +193,14 @@ def flashcards(course_code: str):
 def notes_home():
     term_list = [term for year in get_years() for term in year.get_terms()]
     return render_template("notes_home.html", terms=term_list)
+
+
+@app.route("/notes/search")
+async def notes_search():
+    if not g.search_form.validate():
+        return abort(500)
+    query = g.search_form.q.data
+    return render_template("notes_search.html", query=query, results=await search_htmls(query))
 
 
 # @app.route("/blog/")

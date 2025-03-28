@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_FOLDER = Path(os.environ["BASE_FOLDER"])
+BASE_FOLDER = Path("/base_folder")
 
 
 @dataclass
