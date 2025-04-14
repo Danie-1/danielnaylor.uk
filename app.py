@@ -182,12 +182,12 @@ def home():
 
 @app.errorhandler(404)
 def error_404(error):
-    return render_template("404.html")
+    return render_template("404.html"), 404
 
 
 @app.errorhandler(500)
 def erorr_500(error):
-    return render_template("500.html")
+    return render_template("500.html"), 500
 
 
 if __name__ == "__main__":
