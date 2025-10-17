@@ -139,6 +139,7 @@ def part_to_year_number(part: str) -> str | None:
         "IB": "year2",
         "II": "year3",
         "III": "year4",
+        "III_2025": "year5",
     }.get(part)
 
 
