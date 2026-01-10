@@ -102,6 +102,9 @@ class Course:
             set(alias.lower() for alias in aliases + [self.course_code.lower()])
         )
 
+    def is_public(self) -> bool:
+        return not (self.path / "not_public").exists()
+
 
 @dataclass
 @functools.total_ordering
@@ -122,7 +125,11 @@ class Term:
 
     def get_courses(self) -> list[Course]:
         return sorted(
-            (Course(course) for course in self.path.glob("*") if course.is_dir()),
+            (
+                c
+                for course in self.path.glob("*")
+                if course.is_dir() and (c := Course(course)).is_public()
+            ),
             key=lambda course: course.path.name,
         )
 
