@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: danie-1/danielnaylor.uk
 
 permissions:
   contents: read
@@ -22,9 +22,9 @@ jobs:
       matrix:
         include:
           - context: .
-            image: ghcr.io/Danie-1/tex2image
+            image: ghcr.io/danie-1/danielnaylor.uk
           - context: ./sonic
-            image: ghcr.io/Danie-1/sonic
+            image: ghcr.io/danie-1/sonic
     steps:
       - uses: actions/checkout@v4
       - uses: docker/login-action@v3
