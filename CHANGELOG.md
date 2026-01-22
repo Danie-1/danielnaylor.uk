@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.1...v0.1.2) (2026-01-22)
+
+
+### Bug Fixes
+
+* fix some ci ([6b602ad](https://github.com/Danie-1/danielnaylor.uk/commit/6b602adf9e508785995b642bab88e554be0b17f2))
+
 ## [0.1.1](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.0...v0.1.1) (2026-01-22)
 
 
