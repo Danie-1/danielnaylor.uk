@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.0...v0.1.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* add README to trigger release ([a762e50](https://github.com/Danie-1/danielnaylor.uk/commit/a762e50dc65278d411cf2344b5874cd1b2a6c819))
+
 ## 0.1.0 (2026-01-22)
 
 
