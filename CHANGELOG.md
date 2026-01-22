@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.2...v0.1.3) (2026-01-22)
+
+
+### Bug Fixes
+
+* ... ([f011bad](https://github.com/Danie-1/danielnaylor.uk/commit/f011bad4f91ef2a50b64ad1ce4cbbe1bd8411d6f))
+
 ## [0.1.2](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.1...v0.1.2) (2026-01-22)
 
 
