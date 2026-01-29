@@ -107,7 +107,7 @@ def notes_sources(year: str, term: str, course_code: str, file_path: str):
             "sources_dir.html",
             course_name=course.course_name,
             folder_name=f"{course_code}/{file_path}",
-            items=sorted(Item(i) for i in file.glob("*")),
+            items=sorted(Item(i) for i in file.glob("*") if i.name != "result"),
             breadcrumbs=breadcrumbs,
         )
     if file_path.endswith("/"):
