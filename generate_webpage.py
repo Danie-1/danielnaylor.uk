@@ -65,7 +65,7 @@ class Course:
 
     @property
     def html_exists(self) -> bool:
-        return (self.path / "HTML").exists()
+        return (self.path / "HTML_paginated").exists()
 
     def url(self) -> str:
         return f"/notes/{self.part.part_name}/{self.term.term_name}/{self.course_code}"
