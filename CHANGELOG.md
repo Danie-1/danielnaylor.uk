@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.4](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.3...v0.1.4) (2026-01-29)
+
+
+### Bug Fixes
+
+* add flake.{nix,lock} to excluded sources ([823caf4](https://github.com/Danie-1/danielnaylor.uk/commit/823caf4b99c0a07d00695e18dc4ada80e97ccd36))
+* fix html_exists function ([455bc04](https://github.com/Danie-1/danielnaylor.uk/commit/455bc04c57721f02abe6ce2cab83e819e873b91b))
+* make run.sh better and fix result issue ([c7ad165](https://github.com/Danie-1/danielnaylor.uk/commit/c7ad165d1c2a9d67719e5525f25abbe5da99aa58))
+
 ## [0.1.3](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.2...v0.1.3) (2026-01-22)
 
 
