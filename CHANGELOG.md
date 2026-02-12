@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.4...v0.2.0) (2026-02-12)
+
+
+### Features
+
+* add flake for easy deployment ([faf0ff8](https://github.com/Danie-1/danielnaylor.uk/commit/faf0ff8ec9e4dd81802530efa551f03981b7d831))
+
 ## [0.1.4](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.3...v0.1.4) (2026-01-29)
 
 
