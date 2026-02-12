@@ -10,6 +10,4 @@ RUN uv sync
 COPY templates templates
 COPY *.py ./
 
-ENV BASE_FOLDER=/base_folder
-
 CMD [ "uv", "run", "gunicorn", "app:app", "-b", ":8000" ]
