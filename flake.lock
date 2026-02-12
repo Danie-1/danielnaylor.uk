@@ -1,0 +1,26 @@
+{
+  "nodes": {
+    "docker-tools": {
+      "locked": {
+        "lastModified": 1770922875,
+        "narHash": "sha256-3JQQJ4CFct9xrlzMTmM2H7/Az26mJtmnfb61nAdikPI=",
+        "owner": "Danie-1",
+        "repo": "docker-tools-flake",
+        "rev": "ae6cac0355c52a315e6c5769fbc373346e0caf23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Danie-1",
+        "repo": "docker-tools-flake",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "docker-tools": "docker-tools"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
