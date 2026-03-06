@@ -87,7 +87,8 @@ def notes_sources(year: str, term: str, course_code: str, file_path: str):
                     term=term,
                     course_code=course_code,
                     file_path=file_path + "/",
-                )
+                ),
+                code=301,
             )
         term_folder = folder.parent
         relative_path = os.path.relpath(file, term_folder)
@@ -118,7 +119,8 @@ def notes_sources(year: str, term: str, course_code: str, file_path: str):
                 term=term,
                 course_code=course_code,
                 file_path=file_path.rstrip("/"),
-            )
+            ),
+            code=301,
         )
     base, ext = os.path.splitext(file.name)
     if ext in (".tex", ".html", ".css", ".txt", ".4ht") or base in (
@@ -172,14 +174,14 @@ def notes_html_paginated(year: str, term: str, course: str, html_file: str):
 def course_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
         return abort(404)
-    return redirect(course.pdf_url())
+    return redirect(course.pdf_url(), code=301)
 
 
 @app.route("/<alias>.html")
 def course_html_redirect(alias: str):
     if not (course := get_course_from_alias(alias)):
         return abort(404)
-    return redirect(course.html_url())
+    return redirect(course.html_url(), code=301)
 
 
 @app.route("/notes/<course_code>.apkg")
@@ -200,7 +202,9 @@ async def notes_search():
     if not g.search_form.validate():
         return abort(500)
     query = g.search_form.q.data
-    return render_template("notes_search.html", query=query, results=await search_htmls(query))
+    return render_template(
+        "notes_search.html", query=query, results=await search_htmls(query)
+    )
 
 
 # @app.route("/blog/")
