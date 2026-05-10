@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/Danie-1/danielnaylor.uk/compare/v0.2.0...v0.3.0) (2026-05-10)
+
+
+### Features
+
+* add email address to home page ([bf141bd](https://github.com/Danie-1/danielnaylor.uk/commit/bf141bd5f47297cdb8c76157fa6a91597831c599))
+
+
+### Bug Fixes
+
+* set env vars in run.sh ([a5c325a](https://github.com/Danie-1/danielnaylor.uk/commit/a5c325a7ba56335ce8705848ce3e0996f9fc7dfd))
+
 ## [0.2.0](https://github.com/Danie-1/danielnaylor.uk/compare/v0.1.4...v0.2.0) (2026-03-06)
 
 
