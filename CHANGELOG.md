@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/Danie-1/danielnaylor.uk/compare/v0.3.0...v1.0.0) (2026-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate flake to use a service
+
+### Features
+
+* migrate flake to use a service ([40c43c0](https://github.com/Danie-1/danielnaylor.uk/commit/40c43c0efc56acd5f1862201007a6a37f7001e58))
+
 ## [0.3.0](https://github.com/Danie-1/danielnaylor.uk/compare/v0.2.0...v0.3.0) (2026-05-10)
 
 
