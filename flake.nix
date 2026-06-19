@@ -6,8 +6,9 @@
   };
 
   outputs = { ... }: {
-    nixosModules.default = { config, lib, ... }: with config.danielnaylor-uk; {
-      options.danielnaylor-uk = with lib; with types; {
+    nixosModules.default = { config, lib, ... }: with config.services.danielnaylor-uk; {
+      options.services.danielnaylor-uk = with lib; with types; {
+        enable = mkOption { type = bool; default = false; };
         blue-port = mkOption { type = str; default = "5101"; };
         green-port = mkOption { type = str; default = "5102"; };
         active = mkOption { type = enum [ "blue" "green" ]; default = "blue"; };
@@ -18,9 +19,9 @@
         docker-data-folder = mkOption { type = str; default = "${root-folder}/docker-data"; };
         docker-network = mkOption { type = str; default = "danielnayloruk"; };
         openFirewall = mkOption { type = bool; default = true; };
-        active-port = mkOption { type = str; default = if config.danielnaylor-uk.active == "blue" then blue-port else green-port; };
+        active-port = mkOption { type = str; default = if active == "blue" then blue-port else green-port; };
       };
-      config = lib.mkMerge [
+      config = lib.mkIf enable (lib.mkMerge [
         {
           services.caddy = {
             enable = true;
@@ -87,7 +88,7 @@
         (lib.mkIf openFirewall {
             networking.firewall.allowedTCPPorts = [ 80 443 ];
         })
-      ];
+      ]);
     };
   };
 }
